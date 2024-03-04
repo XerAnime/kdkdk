@@ -1,8 +1,8 @@
 // scrapping sub & dub episodes from gogoanime by animeName
 function getEpisodesList(name){
     let dub = name + " dub";
-    let subSearchUrl = `https://anime-tv-v3-api-nu.vercel.app/search/gogoanime?q=${name}`;
-    let dubSearchUrl = `https://anime-tv-v3-api-nu.vercel.app/search/gogoanime?q=${dub}`;
+    let subSearchUrl = `https://anime-tv-v3-api-n65d.vercel.app/search/gogoanime?q=${name}`;
+    let dubSearchUrl = `https://anime-tv-v3-api-n65d.vercel.app/search/gogoanime?q=${dub}`;
     let episodesDiv = document.querySelector('.episodes');
     let episodesHtml =`
       <div class="video">
@@ -40,7 +40,7 @@ function getEpisodesList(name){
             console.log(gogoId)
             function getSubEpis(){
                 let retry = 0;
-                fetch("https://anime-tv-v3-api-nu.vercel.app/episodes/gogoanime/"+gogoId, { method: 'GET' }).then(response => {
+                fetch("https://anime-tv-v3-api-n65d.vercel.app/episodes/gogoanime/"+gogoId, { method: 'GET' }).then(response => {
                     if (response.ok) { return response.json(); }
                     throw new Error('Request failed!');
                   }).then(jsonResponse => {
@@ -90,7 +90,7 @@ function getEpisodesList(name){
           let gogoId = jsonResponse[0]["id"];
           function getDubEpis(){
               let retries = 0;
-              fetch("https://anime-tv-v3-api-nu.vercel.app/episodes/gogoanime/"+gogoId, { method: 'GET' }).then(response => {
+              fetch("https://anime-tv-v3-api-n65d.vercel.app/episodes/gogoanime/"+gogoId, { method: 'GET' }).then(response => {
                   if (response.ok) { return response.json(); }
                   throw new Error('Request failed!');
                 }).then(jsonResponse => {
@@ -138,12 +138,12 @@ function loadEp(gogoid,poster){loading(true);
     video.style.height = `${w/1.8}px`;
   });
   console.log(gogoid)
-  fetch(`https://anime-tv-v3-api-nu.vercel.app/episode/gogoanime/${gogoid}`,{ method: 'GET' }).then(response => {
+  fetch(`https://anime-tv-v3-api-n65d.vercel.app/episode/gogoanime/${gogoid}`,{ method: 'GET' }).then(response => {
     if (response.ok) { return response.json(); }
     throw new Error('Request failed!');
   }).then(jsonResponse => {
     iframeUrl = jsonResponse[0]["video"];
-    fetch(`https://anime-tv-v3-api-nu.vercel.app/streaminglink/vidstreaming?iframeUrl=${iframeUrl}`,{ method: 'GET' }).then(response => {
+    fetch(`https://anime-tv-v3-api-n65d.vercel.app/streaminglink/vidstreaming?iframeUrl=${iframeUrl}`,{ method: 'GET' }).then(response => {
       if (response.ok) { return response.json(); }
         throw new Error('Request failed!');
       }).then(jsonResponse => {
